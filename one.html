@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Page</title>
+</head>
+<body>
+    <h1>Registration Page</h1>
+    <div id="registration-form">
+        <label for="userId">User ID (5-12 characters):</label>
+        <input type="text" id="userId"><br>
+
+        <label for="password">Password (7-12 characters):</label>
+        <input type="password" id="password"><br>
+
+        <label for="name">Name (Alphabets only):</label>
+        <input type="text" id="name"><br>
+
+        <label for="address">Address (Optional):</label>
+        <input type="text" id="address"><br>
+
+        <label for="country">Country:</label>
+        <input type="text" id="country"><br>
+
+        <label for="zipcode">ZIP Code (Numeric value only):</label>
+        <input type="text" id="zipcode"><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email"><br>
+
+        <label for="sex">Sex:</label>
+        <input type="radio" name="sex" value="male"> Male
+        <input type="radio" name="sex" value="female"> Female<br>
+
+        <label for="language">Language:</label>
+        <input type="checkbox" name="language" value="english"> English
+        <input type="checkbox" name="language" value="spanish"> Spanish
+        <input type="checkbox" name="language" value="french"> French<br>
+
+        <label for="about">About (Optional):</label>
+        <textarea id="about"></textarea><br>
+
+        <button id="submit-button">Submit</button>
+    </div>
+
+    <div id="confirmation-message" style="display: none;">
+        <h2>Registration Successful!</h2>
+        <p>Thank you for registering.</p>
+    </div>
+
+    <script>
+        document.getElementById("submit-button").addEventListener("click", function () {
+            // Get input field values
+            var userId = document.getElementById("userId").value;
+            var password = document.getElementById("password").value;
+            var name = document.getElementById("name").value;
+            var address = document.getElementById("address").value;
+            var country = document.getElementById("country").value;
+            var zipcode = document.getElementById("zipcode").value;
+            var email = document.getElementById("email").value;
+            var sex = document.querySelector('input[name="sex"]:checked');
+            var languages = document.querySelectorAll('input[name="language"]:checked');
+            var about = document.getElementById("about").value;
+
+            // Validation rules
+            var userIdValid = userId.length >= 5 && userId.length <= 12;
+            var passwordValid = password.length >= 7 && password.length <= 12;
+            var nameValid = /^[A-Za-z ]+$/.test(name);
+            var zipcodeValid = /^\d+$/.test(zipcode);
+            var emailValid = /\S+@\S+\.\S+/.test(email);
+            var sexValid = sex !== null;
+            var languageValid = languages.length > 0;
+
+            // Display confirmation message if all fields are valid
+            if (userIdValid && passwordValid && nameValid && zipcodeValid && emailValid && sexValid && languageValid) {
+                document.getElementById("registration-form").style.display = "none";
+                document.getElementById("confirmation-message").style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>
